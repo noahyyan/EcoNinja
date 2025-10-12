@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="text-eco">Leaderboard</h3>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Student</th>
+      <th>Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ s.username }} ({{ s.student_id or '-' }})</td>
+      <td>{{ s.points }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

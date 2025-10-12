@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="text-eco">Redeem Rewards</h3>
+<p>Your points: <strong>{{ user.points }}</strong></p>
+<table class="table mt-3">
+  <thead><tr><th>Item</th><th>Cost</th><th>Stock</th><th></th></tr></thead>
+  <tbody>
+    {% for item in rewards %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.cost }}</td>
+      <td>{{ item.stock }}</td>
+      <td>
+        <form method="post" style="display:inline">
+          <input type="hidden" name="reward_id" value="{{ item.id }}">
+          <button class="btn btn-eco" {% if user.points < item.cost or item.stock<=0 %}disabled{% endif %}>Redeem</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

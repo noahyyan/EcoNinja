@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="text-eco">Manage Rewards</h3>
+<div class="card p-3 mb-3">
+  <form method="post" class="row g-2">
+    <div class="col-md-5"><input name="name" class="form-control" placeholder="Item name" required></div>
+    <div class="col-md-2"><input name="cost" class="form-control" type="number" placeholder="Cost" required></div>
+    <div class="col-md-2"><input name="stock" class="form-control" type="number" placeholder="Stock" required></div>
+    <div class="col-md-3"><button class="btn btn-eco w-100">Add Reward</button></div>
+  </form>
+</div>
+
+<table class="table">
+  <thead><tr><th>Item</th><th>Cost</th><th>Stock</th><th></th></tr></thead>
+  <tbody>
+    {% for r in rewards %}
+    <tr>
+      <td>{{ r.name }}</td>
+      <td>{{ r.cost }}</td>
+      <td>{{ r.stock }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin_delete_reward', rid=r.id) }}" onsubmit="return confirm('Delete reward?');">
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="text-eco">Manage Students</h3>
+<table class="table mt-3">
+  <thead><tr><th>Username</th><th>Student ID</th><th>Points</th><th>Action</th></tr></thead>
+  <tbody>
+    {% for s in students %}
+    <tr>
+      <td>{{ s.username }}</td>
+      <td>{{ s.student_id }}</td>
+      <td>{{ s.points }}</td>
+      <td>
+        <form method="post" action="{{ url_for('admin_delete_student', sid=s.id) }}" onsubmit="return confirm('Delete student?');">
+          <button class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

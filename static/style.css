@@ -1,0 +1,53 @@
+/* EcoNinja green-dominant theme */
+:root{
+  --green-1: #0b6b3a;
+  --green-2: #14a76c;
+  --blue-1: #006f99;
+  --bg: #eefaf3;
+  --text: #033826;
+}
+.bg-eco {
+  background: linear-gradient(90deg, var(--green-1) 0%, var(--green-2) 100%);
+}
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.card, .table {
+  border-radius: 10px;
+}
+.btn-eco {
+  background: linear-gradient(90deg,var(--green-2),var(--green-1));
+  color: white;
+  border: none;
+}
+.text-eco {
+  color: var(--green-1);
+}
+.camera-box {
+  background: #021b12;
+  color: #bff0c7;
+  height: 220px;
+  border-radius: 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+}
+.camera-fake {
+  width: 90%;
+  height: 85%;
+  border: 3px dashed rgba(255,255,255,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+.camera-fake .dot {
+  width:12px;height:12px;background:#ff6b6b;border-radius:50%;margin-top:8px;
+  animation: blink 1.2s infinite;
+}
+@keyframes blink {
+  0%{opacity:1}50%{opacity:0.2}100%{opacity:1}
+}

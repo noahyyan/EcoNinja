@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <div class="card p-4 text-center">
+      <h3 class="text-eco">Machine Interface (Demo)</h3>
+      <p class="lead">Simulate AI detection or enter a Student ID to credit points.</p>
+
+      <div class="mb-3">
+        <h5>AI Camera Preview</h5>
+        <div class="camera-box">
+          <div class="camera-fake">
+            <div id="cam-text"><strong style="font-size:18px">Camera idle</strong></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="alert alert-secondary mt-3">
+          <strong>Detected:</strong> <span id="detected">—</span>
+          &nbsp;|&nbsp; <strong>Weight:</strong> <span id="detected-w">—</span> kg
+          &nbsp;|&nbsp; <strong>Points:</strong> <span id="detected-p">—</span>
+        </div>
+      </div>
+
+      <form method="POST" class="row g-2">
+        <div class="col-md-4">
+          <label>Student ID</label>
+          <input name="student_id" class="form-control" placeholder="e.g. S12345" required>
+        </div>
+        <div class="col-md-3">
+          <label>Trash Type</label>
+          <select name="trash_type" class="form-select">
+            {% for t in trash_options %}
+              <option value="{{ t }}">{{ t }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label>Weight (kg)</label>
+          <input name="weight" class="form-control" type="number" step="0.01" value="0.25">
+        </div>
+        <div class="col-md-2 align-self-end">
+          <button class="btn btn-eco w-100">Add Record</button>
+        </div>
+      </form>
+
+      <hr>
+      <h6>Test Mode Buttons</h6>
+      <p class="small">Quick test presets:</p>
+      <div class="d-flex gap-2 justify-content-center">
+        <button class="btn btn-outline-primary" onclick="fillSim('Plastic',0.2)">Plastic 0.2kg</button>
+        <button class="btn btn-outline-success" onclick="fillSim('Paper',0.1)">Paper 0.1kg</button>
+        <button class="btn btn-outline-warning" onclick="fillSim('Metal',0.05)">Metal 0.05kg</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5 class="text-eco">How to demo</h5>
+      <ol>
+        <li>Enter Student ID of a registered student.</li>
+        <li>Choose trash type and weight, then click <em>Add Record</em>.</li>
+        <li>Open Student Dashboard to see updated points.</li>
+      </ol>
+      <p class="small">Later, your actual machine can POST to <code>/api/add_record</code> to add real detections.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function fillSim(type, weight){
+  document.querySelector('select[name="trash_type"]').value = type;
+  document.querySelector('input[name="weight"]').value = weight;
+  document.getElementById('detected').innerText = type;
+  document.getElementById('detected-w').innerText = weight;
+  // points calculation is done in server; we'll show placeholder
+  document.getElementById('detected-p').innerText = 'calculating...';
+  document.getElementById('cam-text').innerHTML = '<strong style="font-size:18px">AI detected: ' + type + '</strong>';
+}
+</script>
+{% endblock %}

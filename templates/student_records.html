@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="text-eco">Your Recycling Records</h3>
+<table class="table table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>Type</th><th>Weight (kg)</th><th>Points</th><th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.trash_type }}</td>
+      <td>{{ r.weight_kg or '-' }}</td>
+      <td>{{ r.points_awarded }}</td>
+      <td>{{ r.timestamp.strftime("%Y-%m-%d %H:%M") }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
