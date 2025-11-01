@@ -51,12 +51,12 @@ def calc_points(trash_type, weight):
     Lighter materials are worth more per kg.
     """
     multipliers = {
-        "plastic": 8.0,
-        "paper": 6.0,
-        "glass": 4.0,
-        "metal": 3.0,
-        "organic": 2.0,
-        "other": 1.0
+        "plastic": 80.0,
+        "paper": 60.0,
+        "glass": 40.0,
+        "metal": 30.0,
+        "organic": 20.0,
+        "other": 10.0
     }
 
     # Get multiplier based on trash type
