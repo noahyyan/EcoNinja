@@ -44,15 +44,31 @@ class Redemption(db.Model):
 # ------------------------
 # Helpers
 # ------------------------
-def calc_points(trash_type: str, weight_kg: float) -> int:
-    base = {"plastic": 50, "paper": 30, "metal": 80, "glass": 60, "organic": 10, "other": 20}
-    t = (trash_type or "other").lower()
-    multiplier = base.get(t, base["other"])
-    weight = float(weight_kg or 0)
-    pts = int(round(multiplier * weight))
-    if weight > 0 and pts == 0:
-        pts = 1
+# --- Points Calculation Function ---
+def calc_points(trash_type, weight):
+    """
+    Calculates points based on trash type and weight.
+    Lighter materials are worth more per kg.
+    """
+    multipliers = {
+        "plastic": 8.0,
+        "paper": 6.0,
+        "glass": 4.0,
+        "metal": 3.0,
+        "organic": 2.0,
+        "other": 1.0
+    }
+
+    # Get multiplier based on trash type
+    multiplier = multipliers.get(trash_type.lower(), multipliers["other"])
+    pts = round(weight * multiplier, 2)
+
+    # Optional bonus for recyclables
+    if trash_type.lower() in ["plastic", "paper"]:
+        pts = round(pts * 1.1, 2)  # +10% bonus
+
     return pts
+
 
 def logged_in_user():
     uid = session.get("user_id")
