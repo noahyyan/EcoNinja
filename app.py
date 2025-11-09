@@ -66,7 +66,7 @@ def calc_points(trash_type, weight):
     # Optional bonus for recyclables
     if trash_type.lower() in ["plastic", "paper"]:
         pts = round(pts * 1.1, 2)  # +10% bonus
-
+        pts = round(pts 8 10, 2)
     return pts
 
 
